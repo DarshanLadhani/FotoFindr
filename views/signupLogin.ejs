@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+  <%- include('./partials/head.ejs') %>
+
+  <style> 
+    body {
+      background-image: url("/Images/loginbg.jpg");
+      background-size: cover;
+    }
+  </style>
+</head>
+
+<body class="relative h-full bg-gray-100">
+
+  <div class="fixed signin-login w-full h-full flex items-center justify-center p-5 bg-opacity-90 z-50"
+    id="signin-login">
+    <div
+      class="signin-login-form signin-login-form-height shadow-2xl w-full h-auto sm:w-3/5 sm:h-full xl:w-2/6 overflow-auto bg-white rounded-md">
+      <div
+        class="form-heading w-full flex items-center justify-between p-4 text-xl font-bold text-white bg-blue-950 rounded-tr-md rounded-tl-md lg:text-2xl">
+        <span>Get started for free</span><a href="/" class="h-full text-xl">
+          <i class="fa-solid fa-home hover:opacity-80"></i>
+        </a>
+      </div>
+      <div class="tabLinks w-full flex items-center p-4 gap-x-4 lg:text-xl">
+        <button class="tabLink bg-opacity-90 px-3 py-2 rounded-lg" id="login"
+          onclick="displayTab(this , 'login-form')">
+          Log in
+        </button>
+        <button class="tabLink bg-opacity-90 px-3 py-2 rounded-lg" id="signup"
+          onclick="displayTab(this , 'signup-form')">
+          Sign up
+        </button>
+      </div>
+
+      <% if (locals.error) { %>
+        <div class="error w-full flex items-center justify-center px-4 py-2" id="error">
+          <p class="bg-red-400 p-2 w-full flex items-center justify-between rounded-lg text-white">
+            <span>
+              <%= error %>
+            </span>
+            <i class="fa-solid fa-xmark cursor-pointer" id="error-close"></i>
+          </p>
+        </div>
+        <% } %>
+
+          <div class="tab-contents w-full p-4">
+            <div class="tab-content w-full flex justify-center items-center" id="login-form">
+              <form action="/user/login" method="post" class="flex flex-col w-full">
+                <div class="flex flex-col gap-y-2 w-full p-2">
+                  <label for="loginEmail">Your Email</label>
+                  <input type="text" name="email" id="loginEmail" placeholder="example@gmail.com"
+                    class="w-full rounded-md p-2 bg-gray-200 bg-opacity-70 appearance-none outline-none" />
+                </div>
+                <div class="flex flex-col gap-y-2 w-full p-2">
+                  <label for="loginPassword">Password</label>
+                  <input type="password" name="password" id="loginPassword"
+                    class="w-full rounded-md p-2 bg-gray-200 bg-opacity-70 appearance-none outline-none" />
+                </div>
+                <div class="flex w-full p-2">
+                  <button type="submit"
+                    class="w-full bg-blue-950 bg-opacity-90 p-2 rounded-full text-white hover:opacity-95">
+                    Log in
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="tab-content flex justify-center items-center" id="signup-form">
+              <form action="/user/signup" method="post" class="flex flex-col w-full">
+                <div class="flex flex-col gap-y-2 w-full p-2">
+                  <label for="name">Your FullName</label>
+                  <input type="text" name="fullName" id="name" placeholder="eg. John Doe"
+                    class="w-full rounded-md p-2 bg-gray-200 bg-opacity-70 appearance-none outline-none" />
+                </div>
+                <div class="flex flex-col gap-y-2 w-full p-2">
+                  <label for="signupEmail">Your Email</label>
+                  <input type="email" name="email" id="signupEmail" placeholder="example@gmail.com"
+                    class="w-full rounded-md p-2 bg-gray-200 bg-opacity-70 appearance-none outline-none" />
+                </div>
+                <div class="flex flex-col gap-y-2 w-full p-2">
+                  <label for="signupPassword">Password</label>
+                  <input type="password" name="password" id="signupPassword"
+                    class="w-full rounded-md p-2 bg-gray-200 bg-opacity-70 appearance-none outline-none" />
+                </div>
+                <div class="flex flex-col gap-y-2 w-full p-2">
+                  <label for="repassword">Confirm your password</label>
+                  <input type="password" name="repassword" id="repassword"
+                    class="w-full rounded-md p-2 bg-gray-200 bg-opacity-70 appearance-none outline-none" />
+                </div>
+                <div class="flex w-full p-2">
+                  <button type="submit"
+                    class="w-full bg-blue-950 bg-opacity-90 p-2 rounded-full text-white lg:text-xl hover:opacity-95">
+                    Join
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+  </div>
+
+  <script src="/signinLogin.js"></script>
+  <script>
+    const activeTab = "<%= locals.activeTab %>"
+    document.getElementById(activeTab).click()
+  </script>
+</body>
+
+</html>

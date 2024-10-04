@@ -1,0 +1,184 @@
+<nav class="w-full h-auto fixed top-0 z-40 p-2 flex items-center justify-between text-white" id="navigationPanel">
+  <div
+    class="logo text-2xl flex justify-between items-center font-medium md:text-3xl md:px-3 md:py-2 lg:text-4xl lg:mr-4"
+    id="logo">
+    <h1>FotoFindr</h1>
+    <button class="text-[1rem] h-full px-2 bg-gray-200 hidden text-black text-opacity-50 ml-2 rounded-lg md:hidden"
+      id="navSearchPortrait">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+  </div>
+  <div class="relative w-full p-1 hidden" id="nav-search">
+    <form action="/search" onsubmit="performSearch(event)" class="search-form">
+      <input type="text" name="searchQuery" placeholder="Search for Stunninng Images..."
+        class="searchQueryValue py-2.5 px-4 w-full bg-gray-200 text-gray-700 placeholder:text-sm placeholder:text-gray-700 rounded-full outline-none" />
+      <button type="submit" class="absolute top-0 right-0 text-gray-700 h-full p-2 md:right-2 lg:right-2">
+        <i
+          class="fa-solid fa-magnifying-glass p-2 rounded-lg hover:bg-gray-300 transition-colors duration-300 ease-in-out"></i>
+      </button>
+    </form>
+  </div>
+  <div class="nav-mobile-options w-auto h-auto p-1 flex items-center gap-x-4 lg:gap-x-6 md:hidden">
+    <% if (locals.user) { %>
+      <div
+        class="hideOnSearch relative profile flex items-center justify-center w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14">
+        <img src="<%= user.profileImage %>" alt="profileImage"
+          class="profile-img w-full h-full object-cover rounded-full" />
+        <div class="arrow absolute hidden -bottom-5 text-white z-50">
+          <i class="fa-solid fa-caret-up h-full w-full"></i>
+        </div>
+        <div
+          class="profile-options drop-downs absolute -right-10 top-full mt-2 w-44 md:w-48 p-2 h-auto bg-white text-black hidden flex-col gap-y-1 rounded-lg">
+          <div class="py-1 px-1 rounded-lg focus:bg-gray-200 transition-colors duration-300 ease-in-out">
+            <a href="/userProfile" class="flex gap-x-2 items-center"><i class="fa-solid fa-user"></i><span>Your
+                Profile</span></a>
+          </div>
+          <div class="py-2 px-2 rounded-lg focus:bg-gray-200 transition-colors duration-300 ease-in-out">
+            <a href="/user/delete" class="flex gap-x-2 items-center"><i class="fa-solid fa-trash"></i><span>Delete
+                Account</span></a>
+          </div>
+          <div class="py-1 px-1 rounded-lg focus:bg-gray-200 transition-colors duration-300 ease-in-out">
+            <a href="/user/logout" class="flex gap-x-2 items-center"><i
+                class="fa-solid fa-circle-left"></i><span>Logout</span></a>
+          </div>
+        </div>
+      </div>
+      <% } else { %>
+        <div class="button-section hideOnSearch flex items-center gap-x-4 p-1 font-medium">
+          <a href="/user/signup"
+            class="signin bg-gray-500 md:text-xl lg:text-2xl bg-opacity-30 border-0 rounded-full py-2 px-4">
+            Join
+          </a>
+        </div>
+        <% } %>
+
+          <div class="hideOnSearch text-xl cursor-pointer md:text-2xl lg:text-3xl" id="menu-bars">
+            <i class="fa-solid fa-bars"></i>
+          </div>
+          <div
+            class="text-xl ml-2 h-[40px] w-[40px] hidden text-gray-700 justify-center items-center p-2 rounded-full bg-gray-200"
+            id="closeSearch">
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+  </div>
+  <div class="nav-dekstop-options hidden md:flex md:items-center md:gap-x-2 md:h-full ml-4 mr-4">
+    <div class="relative flex items-center justify-center p-1">
+      <div id="explore-option"
+        class="explore-option w-full px-4 py-2 text-[1rem] font-medium rounded-full bg-gray-500 bg-opacity-30 hover:bg-opacity-60 transition-colors duration-300 ease-in-out cursor-pointer">
+        <p class="flex items-center gap-x-2 text-white" id="explore-btn">Explore<i
+            class="fa-solid fa-caret-down" id="explore-icon"></i></p>
+      </div>
+      <div id="explore-options"
+        class="explore-options drop-downs absolute mt-1 right-0 top-full w-40 xl:w-44 p-2 h-auto hidden flex-col gap-y-1 bg-white text-black rounded-lg">
+        <div class="py-2 px-2">
+          <div class="flex gap-x-2 items-center text-[17px]" style="font-weight: 500;">Categories</div>
+        </div>
+        <hr class="mb-2">
+        <div class="py-2 px-2 drop-down-option rounded-lg hover:bg-gray-200 transition-colors duration-300 ease-in-out">
+          <button class="flex gap-x-2 items-center" onclick="performSearch(event , 'Nature')"><span>Nature</span></a>
+        </div>
+        <div class="py-2 px-2 drop-down-option rounded-lg hover:bg-gray-200 transition-colors duration-300 ease-in-out">
+          <button class="flex gap-x-2 items-center" onclick="performSearch(event , 'Animals')"><span>Animals</span></button>
+        </div>
+        <div class="py-2 px-2 drop-down-option rounded-lg hover:bg-gray-200 transition-colors duration-300 ease-in-out">
+          <button class="flex gap-x-2 items-center" onclick="performSearch(event , 'Technology')"><span>Technology</span></button>
+        </div>
+        <div class="py-2 px-2 drop-down-option rounded-lg hover:bg-gray-200 transition-colors duration-300 ease-in-out">
+          <button class="flex gap-x-2 items-center" onclick="performSearch(event , 'Food')"><span>Food</span></button>
+        </div>
+        <div class="py-2 px-2 drop-down-option rounded-lg hover:bg-gray-200 transition-colors duration-300 ease-in-out">
+          <a href="https://pixabay.com/" class="flex gap-x-2 items-center">Explore More <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+
+      </div>
+    </div>
+
+    <% if (locals.user) { %>
+      <div class="relative profile flex items-center justify-center w-12 h-12 lg:w-14 lg:h-14">
+        <img src="<%= user.profileImage %>" alt="profileImage"
+          class="profile-img w-full h-full rounded-full shadow-lg cursor-pointer object-cover" />
+        <div class="arrow absolute hidden right-4 -bottom-6 text-xl text-white z-50">
+          <i class="fa-solid fa-caret-up h-full w-full"></i>
+        </div>
+        <div 
+          class="profile-options drop-downs absolute mt-2.5 right-0 top-full w-40 md:w-52 xl:w-56 p-2 h-auto hidden flex-col gap-y-1 bg-white text-black rounded-lg">
+          <div class="py-2 px-2 drop-down-option rounded-lg hover:bg-gray-200 transition-colors duration-300 ease-in-out">
+            <a href="/userProfile" class="flex gap-x-2 items-center"><i class="fa-solid fa-user"></i><span>Your
+                Profile</span></a>
+          </div>
+          <div class="py-2 px-2 drop-down-option rounded-lg hover:bg-gray-200 transition-colors duration-300 ease-in-out">
+            <a href="/user/delete" class="flex gap-x-2 items-center"><i class="fa-solid fa-trash"></i><span>Delete
+                Account</span></a>
+          </div>
+          <div class="py-2 px-2 drop-down-option rounded-lg hover:bg-gray-200 transition-colors duration-300 ease-in-out">
+            <a href="/user/logout" class="flex gap-x-2 items-center"><i
+                class="fa-solid fa-circle-left"></i><span>Logout</span></a>
+          </div>
+        </div>
+      </div>
+      <% } else { %>
+        <div class="login-signin hidden items-center gap-x-4 p-1 font-medium md:flex">
+          <a href="/user/signup" id="signupLink"
+            class="signin bg-gray-500 md:text-xl bg-opacity-30 border-0 rounded-full py-2 px-4 hover:bg-opacity-60 transition-colors duration-300 ease-in-out">
+            Join
+          </a>
+        </div>
+        <% } %>
+  </div>
+</nav>
+
+<!-- SearchBar for Mobiles  -->
+<div class="w-full h-auto fixed top-0 z-50 p-2 items-center justify-between text-white hidden bg-white md:hidden"
+  id="SearchBarPortrait">
+  <div class="relative w-full p-1">
+    <form action="/search" onsubmit="performSearch(event)" class="search-form">
+      <input type="text" name="searchQuery" placeholder="Search for Stunninng Images..."
+        class="searchQueryValue py-2.5 px-4 w-full bg-gray-200 text-gray-700 placeholder:text-sm placeholder:text-gray-700 rounded-full outline-none" />
+      <button type="submit" class="absolute top-0 right-0 text-gray-700 h-full p-2 md:right-2 lg:right-2">
+        <i class="fa-solid fa-magnifying-glass p-2 rounded-lg"></i>
+      </button>
+    </form>
+  </div>
+  <button
+    class="text-xl h-[40px] w-[40px] p-4 justify-center items-center flex bg-gray-200  text-gray-700 rounded-full ml-2"
+     onclick="closeSearchBarPortrait()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+
+<!-- Navigation for mobile -->
+<nav class="md:hidden">
+  <div id="mobile-menu"
+    class="fixed inset-0 hidden flex-col px-1 gap-y-4 items-center text-white bg-black z-50">
+    <div class="logo-closebtn p-4 flex justify-between items-center w-full border-b">
+      <div class="logo text-2xl font-medium">FotoFindr</div>
+      <div class="text-2xl cursor-pointer">
+        <i class="fa-solid fa-xmark" id="closeBtn"></i>
+      </div>
+    </div>
+
+    <ul class="flex flex-col items-center gap-y-4 py-2 px-4 text-white w-full mb-10">
+      <li class="w-full flex flex-col gap-y-2 p-2  font-medium border-b">
+        <button id="explore-btn-mobile-portrait" class="text-xl flex gap-x-2 items-center">Explore <i class="fa-solid fa-caret-down" id="explore-icon-mobile-portrait"></i></button>
+
+        <div class="hidden flex-col gap-2 py-2" id="explore-options-mobile-portrait">
+          <button class="p-2 w-full text-start link" onclick="performSearch(event , 'Nature')">Nature</button>
+          <button class="p-2 w-full text-start link" onclick="performSearch(event , 'Animals')">Animals</button>
+          <button class="p-2 w-full text-start link" onclick="performSearch(event , 'Technology')">Technology</button>
+          <button class="p-2 w-full text-start link" onclick="performSearch(event , 'Food')">Food</button>
+        </div>
+      </li>
+      <li class="w-full p-2 font-medium border-b">
+        <a href="#about" class="text-xl link">About us</a>
+      </li>
+      <li class="w-full p-2 font-medium border-b">
+        <a href="#contact" class="text-xl link">Contact</a>
+      </li>
+      <% if (locals.user) { %>
+        <li class="w-full p-2 font-medium border-b">
+          <a href="/userProfile" class="text-xl link">Your Profile</a>
+        </li>
+        <% } %>
+    </ul>
+  </div>
+</nav>

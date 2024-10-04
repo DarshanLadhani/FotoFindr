@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/head.ejs') %>
+</head>
+
+<body>
+  <%- include('./partials/navbar.ejs') %>
+
+    <div class="relative headImg w-full h-[150px] md:h-[200px] lg:h-[250px] xl:h-[300px]">
+      <img src="/Images/homebg.jpg" alt="" class="w-full h-full" />
+      <form action="/userProfile/update" id="user-profile-form" method="post" enctype="multipart/form-data">
+        <div
+          class="absolute left-5 md:left-10 -bottom-10 flex flex-col items-center justify-center w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40">
+          <img src="<%= user.profileImage %>" alt="profileImage" id="profile-img"
+            class="w-full h-full object-cover rounded-full border-2 border-white shadow-xl cursor-pointer" />
+  
+          <!-- Hidden Input for file -->
+          <input type="file" name="profileImage" id="profile-img-input" class="hidden" />
+        </div>
+      </form>
+    </div>
+
+    <div class="userInfo mt-12 lg:mt-14  px-4 md:px-8 lg:px-10 py-1 gap-y-1 flex flex-col">
+      <p class="userName text-xl lg:text-3xl font-medium">
+        <%= user.fullName %>
+      </p>
+      <p class="join text-sm lg:text-xl text-gray-400">Joined <%= new Date(user.createdAt).toLocaleDateString() %>
+      </p>
+    </div>  
+
+    <p class="p-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, pariatur voluptatibus expedita amet nulla dolore ipsam cum ipsa placeat explicabo fugit dignissimos laboriosam mollitia tenetur voluptatum quisquam maiores unde quod dolorem quaerat? Est eum obcaecati officia similique rem illum porro laudantium laborum dolorum, perferendis consectetur vel eos fuga sequi aut doloremque hic autem molestias excepturi error. Quae, quos! Ad quaerat enim totam, adipisci quisquam modi atque vel quia inventore velit aspernatur optio consequatur officiis, doloremque dignissimos dolorum eveniet perferendis reprehenderit facilis nobis est. Quas labore porro eius incidunt autem minima numquam quisquam rem, distinctio sed nostrum harum facilis. Modi, quam.</p>
+
+
+    
+    <%- include('./partials/about.ejs') %>
+
+    <script src="/nav.js"></script>
+    <script src="/profile.js"></script>
+</body>
+
+</html>
